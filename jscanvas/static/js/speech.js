@@ -1,28 +1,29 @@
-var recognizing;
+var recognizing = true;
 var recognition = new webkitSpeechRecognition();
 recognition.continuous = true;
-reset();
 recognition.onend = reset();
+
+// reset();
 
 recognition.onerror = function(event) {
     console.log(event.error);
 };
 
 recognition.onresult = function (event) {
-    var text = "";
-    clearCanvas();
+    var d = "";
     for (var i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
-            text = event.results[i][0].transcript;
+            d = event.results[i][0].transcript;
         }
     }
-    console.log(text);
-    writeToCanvas(text);
+    console.log(d);
+    setDirection(d);
 }
 
 function reset() {
     recognizing = false;
     button.innerHTML = "Click to Speak";
+    count = 0;
 }
 
 function toggleStartStop() {

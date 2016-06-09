@@ -2,7 +2,6 @@ var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext("2d");
 var w = $("#canvas").width();
 var h = $("#canvas").height();
-
 var cw = 10;
 var d;
 var food;
@@ -11,21 +10,12 @@ var score;
 function init() {
     d = 'right';
     create_snake();
-
+    create_food();
     if(typeof game_loop != "undefined") clearInterval(game_loop);
-		game_loop = setInterval(paint, 60);
+		game_loop = setInterval(paint, 300);
 }
 
 init();
-
-function writeToCanvas(text) {
-    ctx.fillText(text, 10, 2);
-}
-
-function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
 
 function create_snake() {
 	var length = 5;
@@ -33,6 +23,13 @@ function create_snake() {
 	for(var i = length-1; i>=0; i--) {
 		snake_array.push({x: i, y:0});
 	}
+}
+
+function create_food() {
+	food = {
+		x: Math.round(Math.random()*(w-cw)/cw),
+		y: Math.round(Math.random()*(h-cw)/cw),
+	};
 }
 
 function paint() {
@@ -80,19 +77,13 @@ function paint() {
 	ctx.fillText(score_text, 5, h-5);
 }
 
-function create_food() {
-	food = {
-		x: Math.round(Math.random()*(w-cw)/cw),
-		y: Math.round(Math.random()*(h-cw)/cw),
-	};
-}
-
 function paint_cell(x, y) {
 	ctx.fillStyle = "blue";
 	ctx.fillRect(x*cw, y*cw, cw, cw);
 	ctx.strokeStyle = "white";
 	ctx.strokeRect(x*cw, y*cw, cw, cw);
 }
+
 
 function check_collision(x, y, array) {
 	for(var i = 0; i < array.length; i++)
@@ -101,4 +92,15 @@ function check_collision(x, y, array) {
 		 return true;
 	}
 	return false;
+}
+
+function setDirection(dir) {
+    if (dir.charAt(0) == 'u')
+        d = 'up';
+    else if (dir.charAt(0) == 'd')
+        d = 'down';
+    else if (dir.charAt(0) == 'l')
+        d = 'left';
+    else if (dir.charAt(0) == 'r')
+        d = 'right';
 }
