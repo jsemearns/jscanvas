@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <body>
+            {% load staticfiles %}
+
+            <canvas id="canvas" width="1300" height="200"></canvas>
+            <button id="button" onclick="toggleStartStop();">Click me!</button>
+            <style type="text/css">
+                canvas { border: 1px solid black; }
+            </style>
+            <script type="text/javascript" src="{% static 'js/canvas.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/speech.js' %}"></script>
+        </body>
+    </head>
+</html>
