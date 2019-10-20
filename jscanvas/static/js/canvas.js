@@ -13,7 +13,7 @@ function init() {
     create_snake();
 
     if(typeof game_loop != "undefined") clearInterval(game_loop);
-		game_loop = setInterval(paint, 60);
+		game_loop = setInterval(paint, 1);
 }
 
 init();

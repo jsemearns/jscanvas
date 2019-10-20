@@ -5,7 +5,7 @@ var h = $("#canvas").height();
 var cw = 10;
 var d;
 var food;
-var score;
+var score = 0;
 
 function init() {
     d = 'right';
@@ -104,3 +104,19 @@ function setDirection(dir) {
     else if (dir.charAt(0) == 'r')
         d = 'right';
 }
+
+function setKeyDirection(e) {
+    e = e || window.event;
+    var key = e.keyCode;
+    if (key == 37 || key == 65) {
+        d = 'left';
+    } else if (key == 38 || key == 87) {
+        d = 'up';
+    } else if (key == 39 || key == 68) {
+        d = 'right';
+    } else if (key == 40 || key == 83) {
+        d = 'down';
+    }
+}
+
+document.onkeydown = setKeyDirection;
